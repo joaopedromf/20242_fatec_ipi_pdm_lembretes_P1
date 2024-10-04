@@ -4,19 +4,25 @@ import LembreteLista from './LembreteLista'
 
 export default class App extends Component {
     state = {
-        lembretes: ['Preparar aula de programação','Fazer feira','Preparar marmitas']
+        lembretes: []
     }
 
     salvarLembrete = (lembrete) => {
-        this.state.lembretes.push(lembrete)
-        console.log(this.state.lembretes)
+        this.setState({
+            lembretes: [...this.state.lembretes, lembrete]
+        })
     }
 
     render() {
         return (
             <div className='container'>
                 <h1 className='h2 text-center mt-3'>Lembretes:</h1>
-                <LembreteLista lembretes={this.state.lembretes}/>
+                {
+                    this.state.lembretes.length === 0 ?
+                        <p className='text-center my-4'>Não há lembretes.</p>
+                    :
+                        <LembreteLista lembretes={this.state.lembretes}/>   
+                }
                 <LembreteEntrada 
                     placeholderCampo='Digite seu novo lembrete'
                     textoBotao='Salvar'
