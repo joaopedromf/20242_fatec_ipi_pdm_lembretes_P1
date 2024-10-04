@@ -30,6 +30,7 @@ export default class LembreteEntrada extends Component {
                     value={this.state.termo} 
                     onChange={this.onTermoAlterado} 
                     className='form-control mb-3'
+                    required
                 />
                 <button type='submit' className='btn btn-primary w-100'>
                     {this.props.textoBotao}

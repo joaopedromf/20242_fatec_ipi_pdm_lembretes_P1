@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import LembreteEntrada from './LembreteEntrada'
+import LembreteLista from './LembreteLista'
 
 export default class App extends Component {
     state = {
-        lembretes: []
+        lembretes: ['Preparar aula de programação','Fazer feira','Preparar marmitas']
     }
 
     salvarLembrete = (lembrete) => {
@@ -14,11 +15,8 @@ export default class App extends Component {
     render() {
         return (
             <div className='container'>
-                <div className="row">
-                    <div className="col-sm-12 col-md-6 col-lg-4">
-                        
-                    </div>
-                </div>
+                <h1 className='h2 text-center mt-3'>Lembretes:</h1>
+                <LembreteLista lembretes={this.state.lembretes}/>
                 <LembreteEntrada 
                     placeholderCampo='Digite seu novo lembrete'
                     textoBotao='Salvar'
