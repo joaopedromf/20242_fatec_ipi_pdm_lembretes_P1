@@ -1,0 +1,79 @@
+.div-app{
+    border: 2px solid var(--cor-principal);
+}
+
+.div-campo{
+    position: relative;
+}
+
+.div-lista{
+    background-color: #f3f3f3;
+    animation-name: animacao;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+}
+
+.lembrete{
+    background-color: var(--cor-principal);
+    animation-name: animacao;
+    animation-duration: 1.5s;
+    animation-fill-mode: backwards;
+}
+
+.texto-lembrete{
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.div-lembrete{
+    overflow: hidden;
+}
+
+@keyframes animacao{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+#campo-lembrete{
+    padding: .6rem 2rem .6rem 1rem;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--cor-principal);
+    background-color: #f3f3f3;
+}
+
+#campo-lembrete:focus{
+    outline: none;
+    border: 1px solid rgb(110, 122, 115);
+}
+
+.fa-thumbtack{
+    font-size: 1.1rem;
+    position: absolute;
+    top: 25%;
+    right: 13px;
+    transform: rotate(30deg);
+}
+
+.fa-calendar-xmark{
+    font-size: 2rem;
+    color: var(--cor-principal);
+}
+
+.botao{
+    background-color: var(--cor-principal);
+    color: white;
+    padding: 7px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+.texto-nao{
+    font-size: 1.2rem;
+    font-weight: 350;
+}

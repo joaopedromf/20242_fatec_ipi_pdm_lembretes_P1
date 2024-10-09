@@ -15,14 +15,9 @@ export default class App extends Component {
 
     render() {
         return (
-            <div className='container'>
-                <h1 className='h2 text-center mt-3'>Lembretes:</h1>
-                {
-                    this.state.lembretes.length === 0 ?
-                        <p className='text-center my-4'>Não há lembretes.</p>
-                    :
-                        <LembreteLista lembretes={this.state.lembretes}/>   
-                }
+            <div className='container px-3 px-md-5 py-5 rounded-5 bg-white shadow-lg div-app'>
+                <h1 className='h1 display-5 text-center mb-4'>Lembretes</h1>
+                <LembreteLista lembretes={this.state.lembretes}/>
                 <LembreteEntrada 
                     placeholderCampo='Digite seu novo lembrete'
                     textoBotao='Salvar'

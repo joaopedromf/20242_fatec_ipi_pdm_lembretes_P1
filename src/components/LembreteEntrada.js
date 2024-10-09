@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './components.css'
 
 export default class LembreteEntrada extends Component {
     state = {
@@ -22,17 +23,20 @@ export default class LembreteEntrada extends Component {
     render() {
         return (
             <form onSubmit={this.onFormSubmit} className='mt-4'>
-                <input 
-                    type="text" 
-                    name="campo-lembrete" 
-                    id="campo-lembrete" 
-                    placeholder={this.props.placeholderCampo} 
-                    value={this.state.termo} 
-                    onChange={this.onTermoAlterado} 
-                    className='form-control mb-3'
-                    required
-                />
-                <button type='submit' className='btn btn-primary w-100'>
+                <div className='div-campo'>
+                    <input 
+                        type="text" 
+                        name="campo-lembrete" 
+                        id="campo-lembrete" 
+                        placeholder={this.props.placeholderCampo} 
+                        value={this.state.termo} 
+                        onChange={this.onTermoAlterado} 
+                        className='mb-3'
+                        required
+                    />
+                    <i className='fa-solid fa-thumbtack'></i>
+                </div>
+                <button type='submit' className='w-100 botao'>
                     {this.props.textoBotao}
                 </button>
             </form>
