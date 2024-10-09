@@ -31,7 +31,7 @@ export default class LembreteEntrada extends Component {
                         placeholder={this.props.placeholderCampo} 
                         value={this.state.termo} 
                         onChange={this.onTermoAlterado} 
-                        className='mb-3'
+                        className='mb-3 campo'
                         required
                     />
                     <i className='fa-solid fa-thumbtack'></i>

@@ -1,42 +1,92 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './components.css'
 
-const LembreteLista = ({lembretes}) => {
-    const lista = lembretes.map((lembrete, key)=>(
-        <div key={key} className="col-sm-12 col-md-6 col-lg-4">
-            <div className="rounded-2 text-white p-2 d-flex gap-3 flex-row justify-content-between lembrete">
-                <div className='d-flex align-items-center flex-grow-1 div-lembrete'>
-                    <p className='m-0 texto-lembrete' title={lembrete}>{lembrete}</p>
-                </div>
-                <div className='d-flex align-items-center gap-2'>
-                    <button title='Editar' className='btn btn-warning'>
-                        <i className="fa-solid fa-pencil"></i>
-                    </button>
-                    <button title='Excluir' className='btn btn-danger'>
-                        <i className="fa-solid fa-trash"></i>
-                    </button>
+export default class LembreteLista extends Component{
+    state = {
+        editando: null
+    }
+
+    botaoEditar = (key) => {
+        this.setState({
+            editando: key
+        })
+    }
+
+    botaoSalvar = (key) => {
+        const textoLembrete = document.getElementById(key).value
+        if(textoLembrete){
+            this.props.funcaoEditar(key, textoLembrete)
+            this.setState({
+                editando: null
+            })
+        }
+        else{
+            this.botaoCancelar()
+        }
+    }
+
+    botaoCancelar = () => {
+        this.setState({
+            editando: null
+        })
+    }
+
+    lista = () => {
+        return this.props.lembretes.map((lembrete, key)=>(
+            <div key={key} className="col-sm-12 col-md-6 col-lg-4">
+                <div className="rounded-2 text-white p-2 d-flex gap-3 flex-row justify-content-between lembrete">
+                    <div className='d-flex align-items-center flex-grow-1 div-lembrete'>
+                        {
+                            this.state.editando === key ?
+                                <input type="text" defaultValue={lembrete} id={key} className='campo campo-menor' autoFocus/>
+                            :
+                                <p className='m-0 texto-lembrete' title={lembrete}>{lembrete}</p>
+                        }
+                    </div>
+                    <div className='d-flex align-items-center gap-2'>
+                        {
+                            this.state.editando === key ?
+                                <>
+                                    <button title='Salvar' className='btn btn-success' onClick={() => this.botaoSalvar(key)}>
+                                        <i className="fa-solid fa-check"></i>
+                                    </button>
+                                    <button title='Cancelar' className='btn btn-danger' onClick={() => this.botaoCancelar()}>
+                                        <i className="fa-solid fa-xmark"></i>
+                                    </button>
+                                </>
+                            :
+                                <>
+                                    <button title='Editar' className='btn btn-warning' onClick={() => this.botaoEditar(key)}>
+                                        <i className="fa-solid fa-pencil"></i>
+                                    </button>
+                                    <button title='Excluir' className='btn btn-danger' onClick={() => this.props.funcaoExcluir(key)}>
+                                        <i className="fa-solid fa-trash"></i>
+                                    </button>
+                                </>
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
-    ))
+        ))
+    }
 
-    return (
-        <>
-            {
-                lembretes.length === 0 ?
-                    <div className='text-center my-5'>
-                        <i className="fa-regular fa-calendar-xmark"></i>
-                        <p className='mt-2 texto-nao'>Não há lembretes.</p>
-                    </div>
-                :
-                    <div className='border rounded div-lista'>
-                        <div className="row g-3 p-3">
-                            {lista}
+    render(){
+        return (
+            <>
+                {
+                    this.props.lembretes.length === 0 ?
+                        <div className='text-center my-5'>
+                            <i className="fa-regular fa-calendar-xmark"></i>
+                            <p className='mt-2 texto-nao'>Não há lembretes.</p>
                         </div>
-                    </div>
-            }
-        </>
-    )
+                    :
+                        <div className='border rounded div-lista'>
+                            <div className="row g-3 p-3">
+                                {this.lista()}
+                            </div>
+                        </div>
+                }
+            </>
+        )
+    }
 }
-
-export default LembreteLista

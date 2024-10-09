@@ -39,7 +39,7 @@
     }
 }
 
-#campo-lembrete{
+.campo{
     padding: .6rem 2rem .6rem 1rem;
     width: 100%;
     border-radius: 10px;
@@ -47,9 +47,17 @@
     background-color: #f3f3f3;
 }
 
-#campo-lembrete:focus{
+.campo:focus{
     outline: none;
     border: 1px solid rgb(110, 122, 115);
+}
+
+.campo-menor{
+    padding: 0.3rem 0.5rem;
+}
+
+.fa-solid{
+    width: 16px;
 }
 
 .fa-thumbtack{
