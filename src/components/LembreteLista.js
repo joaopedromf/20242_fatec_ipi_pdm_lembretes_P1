@@ -3,19 +3,26 @@ import './components.css'
 
 export default class LembreteLista extends Component{
     state = {
+        termoEditado: '',
         editando: null
     }
 
-    botaoEditar = (key) => {
+    onTermoEditado = (evento) => {
         this.setState({
-            editando: key
+            termoEditado: evento.target.value
+        })
+    }
+
+    botaoEditar = (key, lembrete) => {
+        this.setState({
+            editando: key,
+            termoEditado: lembrete
         })
     }
 
     botaoSalvar = (key) => {
-        const textoLembrete = document.getElementById(key).value
-        if(textoLembrete){
-            this.props.funcaoEditar(key, textoLembrete)
+        if(this.state.termoEditado){
+            this.props.funcaoEditar(key, this.state.termoEditado)
             this.setState({
                 editando: null
             })
@@ -38,7 +45,7 @@ export default class LembreteLista extends Component{
                     <div className='d-flex align-items-center flex-grow-1 div-lembrete'>
                         {
                             this.state.editando === key ?
-                                <input type="text" defaultValue={lembrete} id={key} className='campo campo-menor' autoFocus/>
+                                <input type="text" value={this.state.termoEditado} id={key} className='campo campo-menor' onChange={this.onTermoEditado} autoFocus/>
                             :
                                 <p className='m-0 texto-lembrete' title={lembrete}>{lembrete}</p>
                         }
@@ -56,7 +63,7 @@ export default class LembreteLista extends Component{
                                 </>
                             :
                                 <>
-                                    <button title='Editar' className='btn btn-warning' onClick={() => this.botaoEditar(key)}>
+                                    <button title='Editar' className='btn btn-warning' onClick={() => this.botaoEditar(key, lembrete)}>
                                         <i className="fa-solid fa-pencil"></i>
                                     </button>
                                     <button title='Excluir' className='btn btn-danger' onClick={() => this.props.funcaoExcluir(key)}>

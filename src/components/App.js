@@ -32,6 +32,24 @@ export default class App extends Component {
         }  
     }
 
+    componentDidMount(){
+        try{
+            const listaLocalStorage = JSON.stringify(localStorage.getItem('lembretes'))
+            const listaAspas = listaLocalStorage.split('"')[1]
+            const lembretes = listaAspas.split(',')
+            if(lembretes[0] !== ''){
+                this.setState({
+                    lembretes: lembretes
+                })
+            }
+        }
+        catch(e){}
+    }
+
+    componentDidUpdate(){
+        localStorage.setItem('lembretes', this.state.lembretes)
+    }
+
     render() {
         return (
             <div className='container px-3 px-md-5 py-5 rounded-5 bg-white shadow-lg div-app'>
